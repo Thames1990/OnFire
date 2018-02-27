@@ -35,7 +35,7 @@ class CounterAdapter(private val context: Context) : RecyclerView.Adapter<Counte
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe { countersWithDiff ->
             counters = countersWithDiff.counters
-            // Dispatch update events if available; otherwise update the whole adapter
+            // Dispatch update events if available; otherwise notify that all counters changed
             countersWithDiff.diff?.dispatchUpdatesTo(this) ?: notifyDataSetChanged()
         }
 

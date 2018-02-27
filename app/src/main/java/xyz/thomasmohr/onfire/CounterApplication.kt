@@ -11,7 +11,7 @@ class CounterApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        startKoin(this, listOf(appModule))
+        startKoin(application = this, modules = listOf(appModule))
     }
 
 }
