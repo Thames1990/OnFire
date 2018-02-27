@@ -16,8 +16,6 @@ class CounterViewModel constructor(application: Application) : AndroidViewModel(
         (application as CounterApplication).appComponent.inject(this)
     }
 
-    fun hasCounters() = counterDatabase.counterModel().count() != 0
-
     fun counters() = counterDatabase.counterModel().counters()
 
     fun createCounter(name: String = "") = counterDatabase.counterModel().createCounter(name)

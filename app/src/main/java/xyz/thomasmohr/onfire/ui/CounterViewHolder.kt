@@ -29,6 +29,7 @@ class CounterViewHolder(context: Context, parent: ViewGroup) : RecyclerView.View
     private val plusButton: Button by bindView(R.id.plus_button)
 
     private var counter: Counter = DUMMY_COUNTER
+
     private lateinit var listener: Listener
 
     init {

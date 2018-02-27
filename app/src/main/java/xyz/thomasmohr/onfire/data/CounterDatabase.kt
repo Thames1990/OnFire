@@ -13,7 +13,9 @@ abstract class CounterDatabase : RoomDatabase() {
     companion object {
         private const val DB_NAME = "counter.db"
 
-        fun createInMemoryDatabase(context: Context): CounterDatabase = Room.inMemoryDatabaseBuilder(
+        fun createInMemoryDatabase(
+            context: Context
+        ): CounterDatabase = Room.inMemoryDatabaseBuilder(
             context.applicationContext,
             CounterDatabase::class.java
         ).build()

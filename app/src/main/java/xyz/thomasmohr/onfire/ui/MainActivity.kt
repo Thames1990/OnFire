@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.support.v7.widget.helper.ItemTouchHelper.*
-import android.view.Menu
 import android.view.View
 import com.jakewharton.rxbinding2.view.clicks
 import com.jakewharton.rxrelay2.PublishRelay
@@ -48,7 +47,12 @@ class MainActivity : AppCompatActivity() {
             itemAnimator = DefaultItemAnimator().apply { supportsChangeAnimations = false }
         }
 
-        itemTouchHelper.attachToRecyclerView(recyclerView)
+        val callback: ItemTouchHelper.Callback = DragManageAdapter(
+            dragDirs = UP or DOWN,
+            swipeDirs = LEFT or RIGHT
+        )
+        val helper = ItemTouchHelper(callback)
+        helper.attachToRecyclerView(recyclerView)
 
         // Always guarantee at least one counter, so the app doesn't open blank on a fresh run
         if (savedInstanceState == null) {
@@ -105,37 +109,6 @@ class MainActivity : AppCompatActivity() {
         startDisposables.clear()
     }
 
-    private val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
-        UP or DOWN,
-        LEFT or RIGHT
-    ) {
-        private var lastFrom: Int = -1
-        private var lastTo: Int = -1
-
-        override fun onMove(
-            recyclerView: RecyclerView,
-            source: RecyclerView.ViewHolder,
-            target: RecyclerView.ViewHolder
-        ): Boolean {
-            val from = counterAdapter.getPosition(source.itemId)
-            val to = counterAdapter.getPosition(target.itemId)
-
-            // Check if we aren't already in the process of making this swap, since this could be
-            // fired multiple times while the animation is running
-            if (lastFrom == from && lastTo == to) return false
-
-            lastFrom = from
-            lastTo = to
-            changeRequestRelay.accept(CounterChange.Move(source.itemId, target.itemId))
-            return true
-        }
-
-        override fun onSwiped(
-            viewHolder: RecyclerView.ViewHolder,
-            direction: Int
-        ) = changeRequestRelay.accept(CounterChange.Delete(viewHolder.itemId))
-    })
-
     private fun onCounterChangeRequested(change: CounterChange) {
         when (change) {
             is CounterChange.Create -> viewModel.createCounter(name = change.name)
@@ -163,4 +136,38 @@ class MainActivity : AppCompatActivity() {
             is CounterChange.UndoDelete -> viewModel.undoDelete(change.counter)
         }
     }
+
+    private inner class DragManageAdapter(
+        dragDirs: Int,
+        swipeDirs: Int
+    ) : SimpleCallback(dragDirs, swipeDirs) {
+
+        private var lastFrom: Int = -1
+        private var lastTo: Int = -1
+
+        override fun onMove(
+            recyclerView: RecyclerView,
+            source: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ): Boolean {
+            val from = counterAdapter.getPosition(source.itemId)
+            val to = counterAdapter.getPosition(target.itemId)
+
+            // Check if we aren't already in the process of making this swap, since this could be
+            // fired multiple times while the animation is running
+            if (lastFrom == from && lastTo == to) return false
+
+            lastFrom = from
+            lastTo = to
+            changeRequestRelay.accept(CounterChange.Move(source.itemId, target.itemId))
+            return true
+        }
+
+        override fun onSwiped(
+            viewHolder: RecyclerView.ViewHolder,
+            direction: Int
+        ) = changeRequestRelay.accept(CounterChange.Delete(viewHolder.itemId))
+
+    }
+
 }
