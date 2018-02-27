@@ -1,6 +1,5 @@
 package xyz.thomasmohr.onfire.ui
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
@@ -16,6 +15,7 @@ import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import org.koin.android.architecture.ext.viewModel
 import xyz.thomasmohr.onfire.R
 import xyz.thomasmohr.onfire.data.CounterChange
 import xyz.thomasmohr.onfire.util.bindView
@@ -33,13 +33,11 @@ class MainActivity : AppCompatActivity() {
     private val linearLayoutManager = LinearLayoutManager(this)
     private var startDisposables = CompositeDisposable()
 
-    private lateinit var viewModel: CounterViewModel
+    private val viewModel by viewModel<CounterViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        viewModel = ViewModelProviders.of(this).get(CounterViewModel::class.java)
 
         with(recyclerView) {
             layoutManager = linearLayoutManager

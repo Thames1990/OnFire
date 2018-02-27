@@ -57,8 +57,8 @@ dependencies {
 
     implementation(Config.Libs.rxJava)
 
-    implementation(Config.Libs.dagger)
-    kapt(Config.Libs.daggerCompiler)
+    implementation(Config.Libs.koin)
+    implementation(Config.Libs.koinArchitecture)
 
     implementation(Config.Libs.rxBinding)
     implementation(Config.Libs.rxBindingKotlin)

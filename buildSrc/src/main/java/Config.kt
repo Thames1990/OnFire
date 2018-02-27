@@ -6,7 +6,7 @@ private const val kotlinVersion = "1.2.21"
 // Compile dependencies
 private const val architectureComponentsVersion = "1.1.0"
 private const val constraintLayoutVersion = "1.0.2"
-private const val daggerVersion = "2.14.1"
+private const val koinVersion = "0.8.2"
 private const val roomVersion = "1.0.0"
 private const val rxBindingVersion = "2.1.1"
 private const val rxJavaVersion = "2.1.10"
@@ -52,8 +52,8 @@ object Config {
 
         val rxJava = "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
 
-        val dagger = "com.google.dagger:dagger:$daggerVersion"
-        val daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
+        val koin = "org.koin:koin-android:$koinVersion"
+        val koinArchitecture = "org.koin:koin-android-architecture:$koinVersion"
 
         val rxBinding = "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion"
         val rxBindingKotlin = "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingVersion"

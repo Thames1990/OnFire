@@ -1,20 +1,10 @@
 package xyz.thomasmohr.onfire.ui
 
-import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import xyz.thomasmohr.onfire.CounterApplication
+import android.arch.lifecycle.ViewModel
 import xyz.thomasmohr.onfire.data.Counter
 import xyz.thomasmohr.onfire.data.CounterDatabase
-import javax.inject.Inject
 
-class CounterViewModel constructor(application: Application) : AndroidViewModel(application) {
-
-    @Inject
-    lateinit var counterDatabase: CounterDatabase
-
-    init {
-        (application as CounterApplication).appComponent.inject(this)
-    }
+class CounterViewModel(private val counterDatabase: CounterDatabase) : ViewModel() {
 
     fun counters() = counterDatabase.counterModel().counters()
 
