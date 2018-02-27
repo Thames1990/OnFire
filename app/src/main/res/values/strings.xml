@@ -1,7 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
     <string name="app_name">OnFire</string>
-    <string name="label">Label…</string>
-    <string name="counter_removed">Counter removed</string>
-    <string name="named_counter_removed">\"%s\" removed</string>
-    <string name="undo">Undo</string>
+
+    <string name="layout_label">Label…</string>
+    <string name="layout_minus">-</string>
+    <string name="layout_plus">+</string>
+    <string name="layout_zero">0</string>
+
+    <string name="menu_settings">Settings</string>
+
+    <string name="snackbar_counter_removed">Counter removed</string>
+    <string name="snackbar_named_counter_removed">\"%s\" removed</string>
+    <string name="snackbar_undo">Undo</string>
 </resources>

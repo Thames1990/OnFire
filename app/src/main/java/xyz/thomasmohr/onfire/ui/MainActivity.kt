@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.support.v7.widget.helper.ItemTouchHelper.*
+import android.view.Menu
 import android.view.View
 import com.jakewharton.rxbinding2.view.clicks
 import com.jakewharton.rxrelay2.PublishRelay
@@ -146,14 +147,14 @@ class MainActivity : AppCompatActivity() {
 
                 if (counter != null) {
                     val text: CharSequence = if (counter.name.isNotBlank()) {
-                        getString(R.string.named_counter_removed, counter.name)
+                        getString(R.string.snackbar_named_counter_removed, counter.name)
                     } else {
-                        getString(R.string.counter_removed)
+                        getString(R.string.snackbar_counter_removed)
                     }
 
                     Snackbar
                         .make(coordinatorLayout, text, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.undo, {
+                        .setAction(R.string.snackbar_undo, {
                             changeRequestRelay.accept(CounterChange.UndoDelete(counter))
                         })
                         .show()

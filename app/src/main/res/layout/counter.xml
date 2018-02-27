@@ -17,8 +17,9 @@
             android:id="@+id/plus_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
             android:layout_marginRight="0dp"
-            android:text="+"
+            android:text="@string/layout_plus"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,9 +27,10 @@
             android:id="@+id/minus_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
             android:layout_marginRight="0dp"
             android:layout_marginTop="8dp"
-            android:text="-"
+            android:text="@string/layout_minus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/plus_button"
@@ -39,33 +41,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
             android:padding="8dp"
-            android:text="0"
             android:textColor="#000"
             android:textSize="48sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/plus_button"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@sample/counts" />
 
         <EditText
             android:id="@+id/counter_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="16dp"
-            android:hint="@string/label"
+            android:layout_marginStart="0dp"
+            android:hint="@string/layout_label"
             android:imeOptions="flagNoExtractUi|actionDone"
             android:inputType="textCapWords"
             android:maxLines="1"
             android:selectAllOnFocus="true"
-            android:text="Name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/count"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/full_names" />
 
     </android.support.constraint.ConstraintLayout>
 
