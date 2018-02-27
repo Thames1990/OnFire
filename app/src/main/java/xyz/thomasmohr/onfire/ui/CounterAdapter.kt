@@ -14,7 +14,7 @@ import xyz.thomasmohr.onfire.data.CounterChange
 
 class CounterAdapter(private val context: Context) : RecyclerView.Adapter<CounterViewHolder>() {
 
-    private var data: List<Counter> = emptyList()
+    private var counters: List<Counter> = emptyList()
 
     private val changes = PublishRelay.create<CounterChange>()
 
@@ -34,7 +34,7 @@ class CounterAdapter(private val context: Context) : RecyclerView.Adapter<Counte
         }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe { countersWithDiff ->
-            data = countersWithDiff.counters
+            counters = countersWithDiff.counters
             if (countersWithDiff.diff != null) countersWithDiff.diff.dispatchUpdatesTo(this)
             else notifyDataSetChanged()
         }
@@ -47,15 +47,15 @@ class CounterAdapter(private val context: Context) : RecyclerView.Adapter<Counte
     override fun onBindViewHolder(
         holder: CounterViewHolder,
         position: Int
-    ) = holder.bind(data[position], listener)
+    ) = holder.bind(counters[position], listener)
 
     override fun onViewDetachedFromWindow(holder: CounterViewHolder) = holder.detach()
 
-    override fun getItemCount() = data.size
+    override fun getItemCount() = counters.size
 
-    override fun getItemId(position: Int) = data[position].id
+    override fun getItemId(position: Int) = counters[position].id
 
-    fun getPosition(itemId: Long) = data.indexOfFirst { counter -> counter.id == itemId }
+    fun getPosition(itemId: Long) = counters.indexOfFirst { counter -> counter.id == itemId }
 
     private class DiffCallback(
         private val old: List<Counter>,
