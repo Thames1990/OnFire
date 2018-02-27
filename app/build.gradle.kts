@@ -42,31 +42,30 @@ android {
 
 dependencies {
     implementation(Config.Libs.kotlin_std)
-
-    implementation(Config.Libs.appcompat)
-    implementation(Config.Libs.cardview)
-    implementation(Config.Libs.design)
-    implementation(Config.Libs.constraintLayout)
-    implementation(Config.Libs.recyclerview)
-
-    implementation(Config.Libs.lifecycleExtensions)
-    implementation(Config.Libs.roomRuntime)
-    implementation(Config.Libs.roomRxJava)
-    kapt(Config.Libs.roomCompiler)
-    kapt(Config.Libs.lifecycleCompiler)
-
-    implementation(Config.Libs.rxJava)
-
-    implementation(Config.Libs.koin)
-    implementation(Config.Libs.koinArchitecture)
-
-    implementation(Config.Libs.rxBinding)
-    implementation(Config.Libs.rxBindingKotlin)
-
-    implementation(Config.Libs.rxRelay)
-
+    // Support Library
+    implementation(Config.Libs.SupportLibrary.appcompat)
+    implementation(Config.Libs.SupportLibrary.cardview)
+    implementation(Config.Libs.SupportLibrary.design)
+    implementation(Config.Libs.SupportLibrary.constraintLayout)
+    implementation(Config.Libs.SupportLibrary.recyclerview)
+    // ViewModel and LiveData
+    implementation(Config.Libs.ArchitectureComponents.Lifecycle.extensions)
+    kapt(Config.Libs.ArchitectureComponents.Lifecycle.compiler)
+    // Room
+    implementation(Config.Libs.ArchitectureComponents.Room.runtime)
+    implementation(Config.Libs.ArchitectureComponents.Room.rxJava)
+    kapt(Config.Libs.ArchitectureComponents.Room.compiler)
+    // RxJava
+    implementation(Config.Libs.RxJava.java)
+    implementation(Config.Libs.RxJava.binding)
+    implementation(Config.Libs.RxJava.bindingKotlin)
+    implementation(Config.Libs.RxJava.relay)
+    // Koin
+    implementation(Config.Libs.Koin.android)
+    implementation(Config.Libs.Koin.androidArchitecture)
+    // Test
     testImplementation(Config.TestLibs.jUnit)
-    testImplementation(Config.TestLibs.espresso)
-
+    // Instrumentation test
     androidTestImplementation(Config.TestLibs.espresso)
+    androidTestImplementation(Config.TestLibs.jUnit)
 }

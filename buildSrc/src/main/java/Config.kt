@@ -1,69 +1,70 @@
-@file:Suppress("MayBeConstant", "unused")
-
-private const val androidGradleVersion = "3.0.1"
-private const val kotlinVersion = "1.2.21"
-
-// Compile dependencies
-private const val architectureComponentsVersion = "1.1.0"
-private const val constraintLayoutVersion = "1.0.2"
-private const val koinVersion = "0.8.2"
-private const val roomVersion = "1.0.0"
-private const val rxBindingVersion = "2.1.1"
-private const val rxJavaVersion = "2.1.10"
-private const val rxRelayVersion = "2.0.0"
-private const val supportVersion = "27.0.2"
-
-// Test dependencies
-private const val jUnitVersion = "4.12"
-private const val espressoVersion = "3.0.1"
-
+@Suppress("unused")
 object Config {
 
+    private const val kotlinVersion = "1.2.21"
+
     object BuildPlugins {
-        val androidGradle = "com.android.tools.build:gradle:$androidGradleVersion"
-        val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        const val androidGradle = "com.android.tools.build:gradle:3.0.1"
+        const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 
     object Android {
-        val buildToolsVersion = "27.0.3"
-        val minSdkVersion = 15
-        val targetSdkVersion = 27
-        val compileSdkVersion = 27
-        val applicationId = "xyz.thomasmohr.onfire"
-        val versionCode = 1
-        val versionName = "1.0"
+        const val buildToolsVersion = "27.0.3"
+        const val minSdkVersion = 15
+        const val targetSdkVersion = 27
+        const val compileSdkVersion = 27
+        const val applicationId = "xyz.thomasmohr.onfire"
+        const val versionCode = 1
+        const val versionName = "1.0"
     }
 
     object Libs {
-        val kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+        const val kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
-        val appcompat = "com.android.support:appcompat-v7:$supportVersion"
-        val cardview = "com.android.support:cardview-v7:$supportVersion"
-        val constraintLayout =
-            "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
-        val design = "com.android.support:design:$supportVersion"
-        val recyclerview = "com.android.support:recyclerview-v7:$supportVersion"
+        object SupportLibrary {
+            private const val support = "27.0.2"
+            const val appcompat = "com.android.support:appcompat-v7:$support"
+            const val cardview = "com.android.support:cardview-v7:$support"
+            const val constraintLayout = "com.android.support.constraint:constraint-layout:1.0.2"
+            const val design = "com.android.support:design:$support"
+            const val recyclerview = "com.android.support:recyclerview-v7:$support"
+        }
 
-        val lifecycleExtensions = "android.arch.lifecycle:extensions:$architectureComponentsVersion"
-        val roomRuntime = "android.arch.persistence.room:runtime:$roomVersion"
-        val roomRxJava = "android.arch.persistence.room:rxjava2:$roomVersion"
-        val roomCompiler = "android.arch.persistence.room:compiler:$roomVersion"
-        val lifecycleCompiler = "android.arch.lifecycle:compiler:$architectureComponentsVersion"
+        object ArchitectureComponents {
 
-        val rxJava = "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+            object Lifecycle {
+                private const val lifecycle = "1.1.0"
+                const val extensions = "android.arch.lifecycle:extensions:$lifecycle"
+                const val compiler = "android.arch.lifecycle:compiler:$lifecycle"
+            }
 
-        val koin = "org.koin:koin-android:$koinVersion"
-        val koinArchitecture = "org.koin:koin-android-architecture:$koinVersion"
+            object Room {
+                private const val room = "1.0.0"
+                const val compiler = "android.arch.persistence.room:compiler:$room"
+                const val runtime = "android.arch.persistence.room:runtime:$room"
+                const val rxJava = "android.arch.persistence.room:rxjava2:$room"
+            }
 
-        val rxBinding = "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion"
-        val rxBindingKotlin = "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingVersion"
+        }
 
-        val rxRelay = "com.jakewharton.rxrelay2:rxrelay:$rxRelayVersion"
+        object RxJava {
+            private const val rxBinding = "2.1.1"
+            const val java = "io.reactivex.rxjava2:rxjava:2.1.10"
+            const val binding = "com.jakewharton.rxbinding2:rxbinding:$rxBinding"
+            const val bindingKotlin = "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBinding"
+            const val relay = "com.jakewharton.rxrelay2:rxrelay:2.0.0"
+        }
+
+        object Koin {
+            private const val koin = "0.8.2"
+            const val android = "org.koin:koin-android:$koin"
+            const val androidArchitecture = "org.koin:koin-android-architecture:$koin"
+        }
     }
 
     object TestLibs {
-        val jUnit = "junit:junit:$jUnitVersion"
-        val espresso = "com.android.support.test.espresso:espresso-core:$espressoVersion"
+        const val espresso = "com.android.support.test.espresso:espresso-core:3.0.1"
+        const val jUnit = "junit:junit:4.12"
     }
 
 }
