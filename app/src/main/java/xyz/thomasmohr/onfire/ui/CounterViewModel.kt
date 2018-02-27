@@ -1,12 +1,13 @@
 package xyz.thomasmohr.onfire.ui
 
 import android.arch.lifecycle.ViewModel
+import io.reactivex.Flowable
 import xyz.thomasmohr.onfire.data.Counter
 import xyz.thomasmohr.onfire.data.CounterDatabase
 
 class CounterViewModel(private val counterDatabase: CounterDatabase) : ViewModel() {
 
-    fun counters() = counterDatabase.counterModel().counters()
+    fun counters(): Flowable<List<Counter>> = counterDatabase.counterModel().counters()
 
     fun createCounter(name: String = "") = counterDatabase.counterModel().createCounter(name)
 
