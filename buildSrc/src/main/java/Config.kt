@@ -24,7 +24,7 @@ object Config {
         const val kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
         object SupportLibrary {
-            private const val support = "27.0.2"
+            private const val support = "27.1.0"
             const val appcompat = "com.android.support:appcompat-v7:$support"
             const val cardview = "com.android.support:cardview-v7:$support"
             const val constraintLayout = "com.android.support.constraint:constraint-layout:1.0.2"
