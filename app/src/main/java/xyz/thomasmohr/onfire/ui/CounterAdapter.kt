@@ -11,7 +11,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import xyz.thomasmohr.onfire.data.Counter
 import xyz.thomasmohr.onfire.data.CounterChange
-import xyz.thomasmohr.onfire.data.CountersWithDiff
 
 class CounterAdapter(private val context: Context) : RecyclerView.Adapter<CounterViewHolder>() {
 
@@ -78,4 +77,6 @@ class CounterAdapter(private val context: Context) : RecyclerView.Adapter<Counte
         ) = old[oldItemPosition] == new[newItemPosition]
 
     }
+
+    private data class CountersWithDiff(val counters: List<Counter>, val diff: DiffUtil.DiffResult?)
 }
