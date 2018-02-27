@@ -4,6 +4,8 @@ object Config {
     private const val kotlinVersion = "1.2.21"
 
     object BuildPlugins {
+        const val androidGitVersion =
+            "gradle.plugin.com.gladed.gradle.androidgitversion:gradle-android-git-version:0.4.3"
         const val androidGradle = "com.android.tools.build:gradle:3.0.1"
         const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }

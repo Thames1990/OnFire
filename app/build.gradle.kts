@@ -12,6 +12,7 @@ import org.gradle.kotlin.dsl.setValue
 
 plugins {
     id("com.android.application")
+    id("com.gladed.androidgitversion")
     kotlin("android")
     kotlin("kapt")
 }
@@ -24,8 +25,10 @@ android {
         applicationId = Config.Android.applicationId
         minSdkVersion(Config.Android.minSdkVersion)
         targetSdkVersion(Config.Android.targetSdkVersion)
-        versionCode = Config.Android.versionCode
-        versionName = Config.Android.versionName
+
+        androidGitVersion.prefix = "v"
+        versionCode = androidGitVersion.code()
+        versionName = androidGitVersion.name()
 
         vectorDrawables.useSupportLibrary = true
 
