@@ -1,3 +1,10 @@
+import Config.Android.applicationId
+import Config.Android.buildToolsVersion
+import Config.Android.compileSdkVersion
+import Config.Android.minSdkVersion
+import Config.Android.targetSdkVersion
+import Config.Android.versionCode
+import Config.Android.versionName
 import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.kotlin
@@ -19,6 +26,8 @@ android {
         targetSdkVersion(Config.Android.targetSdkVersion)
         versionCode = Config.Android.versionCode
         versionName = Config.Android.versionName
+
+        vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
     }

@@ -1,3 +1,5 @@
+@file:Suppress("MayBeConstant", "unused")
+
 private const val androidGradleVersion = "3.0.1"
 private const val kotlinVersion = "1.2.21"
 
