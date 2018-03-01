@@ -7,6 +7,8 @@ import xyz.thomasmohr.onfire.data.CounterDatabase
 
 class CounterViewModel(private val counterDatabase: CounterDatabase) : ViewModel() {
 
+    fun counter(id: Long): Counter? = counterDatabase.counterModel().counter(id)
+
     fun counters(): Flowable<List<Counter>> = counterDatabase.counterModel().counters()
 
     fun createCounter(name: String = "") = counterDatabase.counterModel().createCounter(name)

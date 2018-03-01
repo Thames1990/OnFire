@@ -1,5 +1,6 @@
 package xyz.thomasmohr.onfire.ui
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
@@ -17,6 +18,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import org.koin.android.architecture.ext.viewModel
 import xyz.thomasmohr.onfire.R
+import xyz.thomasmohr.onfire.data.Counter
 import xyz.thomasmohr.onfire.data.CounterChange
 import xyz.thomasmohr.onfire.util.bindView
 import xyz.thomasmohr.onfire.util.plus
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private val counterAdapter = CounterAdapter(this)
     private val linearLayoutManager = LinearLayoutManager(this)
     private var startDisposables = CompositeDisposable()
+    private val mediaPlayer = MediaPlayer()
 
     private val viewModel by viewModel<CounterViewModel>()
 
@@ -110,7 +113,27 @@ class MainActivity : AppCompatActivity() {
     private fun onCounterChangeRequested(change: CounterChange) {
         when (change) {
             is CounterChange.Create -> viewModel.createCounter(name = change.name)
-            is CounterChange.Count -> viewModel.modifyCount(change.counterId, change.difference)
+            is CounterChange.Count -> {
+                viewModel.modifyCount(change.counterId, change.difference)
+
+                val counter: Counter? = viewModel.counter(change.counterId)
+                if (counter != null) {
+                    val count: Long = counter.count
+                    val soundName = "russ_bray_$count"
+                    val soundId = resources.getIdentifier(soundName, "raw", packageName)
+
+                    if (soundId == 0) return
+                    val sound = resources.openRawResourceFd(soundId) ?: return
+
+                    with(mediaPlayer) {
+                        reset()
+                        setDataSource(sound.fileDescriptor, sound.startOffset, sound.length)
+                        prepare()
+                        start()
+                    }
+                    sound.close()
+                }
+            }
             is CounterChange.Name -> viewModel.modifyName(change.counterId, change.name)
             is CounterChange.Move -> viewModel.move(change.fromCounterId, change.toCounterId)
             is CounterChange.Delete -> {
