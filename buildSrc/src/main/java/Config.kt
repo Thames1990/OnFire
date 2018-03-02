@@ -1,7 +1,7 @@
 @Suppress("unused")
 object Config {
 
-    private const val kotlinVersion = "1.2.21"
+    private const val kotlinVersion = "1.2.30"
 
     object BuildPlugins {
         const val androidGitVersion =
