@@ -1,10 +1,3 @@
-import Config.Android.applicationId
-import Config.Android.buildToolsVersion
-import Config.Android.compileSdkVersion
-import Config.Android.minSdkVersion
-import Config.Android.targetSdkVersion
-import Config.Android.versionCode
-import Config.Android.versionName
 import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.kotlin
@@ -59,9 +52,9 @@ dependencies {
     implementation(Config.Libs.ArchitectureComponents.Room.rxJava)
     kapt(Config.Libs.ArchitectureComponents.Room.compiler)
     // RxJava
-    implementation(Config.Libs.RxJava.java)
-    implementation(Config.Libs.RxJava.binding)
-    implementation(Config.Libs.RxJava.bindingKotlin)
+    implementation(Config.Libs.RxJava.core)
+    implementation(Config.Libs.RxJava.Binding.core)
+    implementation(Config.Libs.RxJava.Binding.kotlin)
     implementation(Config.Libs.RxJava.relay)
     // Koin
     implementation(Config.Libs.Koin.android)

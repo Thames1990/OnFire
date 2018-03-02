@@ -24,43 +24,44 @@ object Config {
         const val kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
         object SupportLibrary {
-            private const val support = "27.1.0"
-            const val appcompat = "com.android.support:appcompat-v7:$support"
-            const val cardview = "com.android.support:cardview-v7:$support"
+            private const val version = "27.1.0"
+            const val appcompat = "com.android.support:appcompat-v7:$version"
+            const val cardview = "com.android.support:cardview-v7:$version"
             const val constraintLayout = "com.android.support.constraint:constraint-layout:1.0.2"
-            const val design = "com.android.support:design:$support"
-            const val recyclerview = "com.android.support:recyclerview-v7:$support"
+            const val design = "com.android.support:design:$version"
+            const val recyclerview = "com.android.support:recyclerview-v7:$version"
         }
 
         object ArchitectureComponents {
-
             object Lifecycle {
-                private const val lifecycle = "1.1.0"
-                const val extensions = "android.arch.lifecycle:extensions:$lifecycle"
-                const val compiler = "android.arch.lifecycle:compiler:$lifecycle"
+                private const val version = "1.1.0"
+                const val extensions = "android.arch.lifecycle:extensions:$version"
+                const val compiler = "android.arch.lifecycle:compiler:$version"
             }
 
             object Room {
-                private const val room = "1.0.0"
-                const val compiler = "android.arch.persistence.room:compiler:$room"
-                const val runtime = "android.arch.persistence.room:runtime:$room"
-                const val rxJava = "android.arch.persistence.room:rxjava2:$room"
+                private const val version = "1.0.0"
+                const val compiler = "android.arch.persistence.room:compiler:$version"
+                const val runtime = "android.arch.persistence.room:runtime:$version"
+                const val rxJava = "android.arch.persistence.room:rxjava2:$version"
             }
-
         }
 
         object RxJava {
-            private const val rxBinding = "2.1.1"
-            const val java = "io.reactivex.rxjava2:rxjava:2.1.10"
-            const val binding = "com.jakewharton.rxbinding2:rxbinding:$rxBinding"
-            const val bindingKotlin = "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBinding"
+            const val core = "io.reactivex.rxjava2:rxjava:2.1.10"
             const val relay = "com.jakewharton.rxrelay2:rxrelay:2.0.0"
+
+            object Binding {
+                private const val version = "2.1.1"
+                const val core = "com.jakewharton.rxbinding2:rxbinding:$version"
+                const val kotlin = "com.jakewharton.rxbinding2:rxbinding-kotlin:$version"
+            }
         }
 
         object Koin {
-            private const val koin = "0.8.2"
-            const val android = "org.koin:koin-android:$koin"
-            const val androidArchitecture = "org.koin:koin-android-architecture:$koin"
+            private const val version = "0.8.2"
+            const val android = "org.koin:koin-android:$version"
+            const val androidArchitecture = "org.koin:koin-android-architecture:$version"
         }
     }
 
