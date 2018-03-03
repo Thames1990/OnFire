@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
                     val soundId = resources.getIdentifier(soundName, "raw", packageName)
 
                     if (soundId == 0) return
-                    val sound = resources.openRawResourceFd(soundId) ?: return
+                    val sound = resources.openRawResourceFd(soundId)
 
                     with(mediaPlayer) {
                         reset()
