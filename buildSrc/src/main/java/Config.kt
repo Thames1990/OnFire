@@ -21,7 +21,7 @@ object Config {
     }
 
     object Libs {
-        const val kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+        const val kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
         object SupportLibrary {
             private const val version = "27.1.0"
