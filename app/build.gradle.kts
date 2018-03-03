@@ -14,13 +14,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Config.Android.compileSdkVersion)
-    buildToolsVersion(Config.Android.buildToolsVersion)
+    compileSdkVersion(Android.compileSdkVersion)
+    buildToolsVersion(Android.buildToolsVersion)
 
     defaultConfig {
-        applicationId = Config.Android.applicationId
-        minSdkVersion(Config.Android.minSdkVersion)
-        targetSdkVersion(Config.Android.targetSdkVersion)
+        applicationId = Android.applicationId
+        minSdkVersion(Android.minSdkVersion)
+        targetSdkVersion(Android.targetSdkVersion)
         versionCode = androidGitVersion.code()
         versionName = androidGitVersion.name()
 
@@ -40,31 +40,31 @@ android {
 }
 
 dependencies {
-    implementation(Config.Libs.kotlin_std)
+    implementation(Libs.kotlin_std)
     // Support Library
-    implementation(Config.Libs.SupportLibrary.appcompat)
-    implementation(Config.Libs.SupportLibrary.cardview)
-    implementation(Config.Libs.SupportLibrary.design)
-    implementation(Config.Libs.SupportLibrary.constraintLayout)
-    implementation(Config.Libs.SupportLibrary.recyclerview)
+    implementation(Libs.SupportLibrary.appcompat)
+    implementation(Libs.SupportLibrary.cardview)
+    implementation(Libs.SupportLibrary.design)
+    implementation(Libs.SupportLibrary.constraintLayout)
+    implementation(Libs.SupportLibrary.recyclerview)
     // ViewModel and LiveData
-    implementation(Config.Libs.ArchitectureComponents.Lifecycle.extensions)
-    kapt(Config.Libs.ArchitectureComponents.Lifecycle.compiler)
+    implementation(Libs.ArchitectureComponents.Lifecycle.extensions)
+    kapt(Libs.ArchitectureComponents.Lifecycle.compiler)
     // Room
-    implementation(Config.Libs.ArchitectureComponents.Room.runtime)
-    implementation(Config.Libs.ArchitectureComponents.Room.rxJava)
-    kapt(Config.Libs.ArchitectureComponents.Room.compiler)
+    implementation(Libs.ArchitectureComponents.Room.runtime)
+    implementation(Libs.ArchitectureComponents.Room.rxJava)
+    kapt(Libs.ArchitectureComponents.Room.compiler)
     // RxJava
-    implementation(Config.Libs.RxJava.core)
-    implementation(Config.Libs.RxJava.Binding.core)
-    implementation(Config.Libs.RxJava.Binding.kotlin)
-    implementation(Config.Libs.RxJava.relay)
+    implementation(Libs.RxJava.core)
+    implementation(Libs.RxJava.Binding.core)
+    implementation(Libs.RxJava.Binding.kotlin)
+    implementation(Libs.RxJava.relay)
     // Koin
-    implementation(Config.Libs.Koin.android)
-    implementation(Config.Libs.Koin.androidArchitecture)
+    implementation(Libs.Koin.android)
+    implementation(Libs.Koin.androidArchitecture)
     // Test
-    testImplementation(Config.TestLibs.jUnit)
+    testImplementation(TestLibs.jUnit)
     // Instrumentation test
-    androidTestImplementation(Config.TestLibs.espresso)
-    androidTestImplementation(Config.TestLibs.jUnit)
+    androidTestImplementation(TestLibs.espresso)
+    androidTestImplementation(TestLibs.jUnit)
 }

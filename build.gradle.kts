@@ -10,9 +10,9 @@ buildscript {
         maven("https://plugins.gradle.org/m2/")
     }
     dependencies {
-        classpath(Config.BuildPlugins.androidGitVersion)
-        classpath(Config.BuildPlugins.androidGradle)
-        classpath(Config.BuildPlugins.kotlinGradlePlugin)
+        classpath(BuildPlugins.androidGitVersion)
+        classpath(BuildPlugins.androidGradle)
+        classpath(BuildPlugins.kotlinGradlePlugin)
     }
 }
 
