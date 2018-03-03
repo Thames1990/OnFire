@@ -20,15 +20,9 @@ class CounterViewHolder(
 
     private var counter: Counter = DUMMY_COUNTER
 
-    fun bind(counter: Counter, listener: Listener) {
-        if (this.counter == counter) return
-        this.counter = counter
+    private lateinit var listener: Listener
 
-        if (counter_name.text.toString() != counter.name) {
-            counter_name.setText(counter.name)
-        }
-        count.text = counter.count.toString()
-
+    init {
         plus_button.setOnClickListener {
             listener.onCounterChange(CounterChange.Count(counterId = counter.id, difference = 1))
         }
@@ -65,6 +59,18 @@ class CounterViewHolder(
                 ) = Unit
             })
         }
+    }
+
+    fun bind(counter: Counter, listener: Listener) {
+        if (this.counter == counter) return
+        this.counter = counter
+
+        this.listener = listener
+
+        if (counter_name.text.toString() != counter.name) {
+            counter_name.setText(counter.name)
+        }
+        count.text = counter.count.toString()
     }
 
     fun detach() {
