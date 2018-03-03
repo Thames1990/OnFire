@@ -19,13 +19,13 @@ import org.koin.android.architecture.ext.viewModel
 import xyz.thomasmohr.onfire.R
 import xyz.thomasmohr.onfire.data.Counter
 import xyz.thomasmohr.onfire.data.CounterChange
-import xyz.thomasmohr.onfire.util.plus
+import xyz.thomasmohr.onfire.plus
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
     private val changeRequestRelay = PublishRelay.create<CounterChange>()
-    private val counterAdapter = CounterAdapter(this)
+    private val counterAdapter = CounterAdapter()
     private val linearLayoutManager = LinearLayoutManager(this)
     private var startDisposables = CompositeDisposable()
     private val mediaPlayer = MediaPlayer()

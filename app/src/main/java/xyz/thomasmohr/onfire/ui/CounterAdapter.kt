@@ -1,6 +1,5 @@
 package xyz.thomasmohr.onfire.ui
 
-import android.content.Context
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
@@ -9,10 +8,12 @@ import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import xyz.thomasmohr.onfire.R
 import xyz.thomasmohr.onfire.data.Counter
 import xyz.thomasmohr.onfire.data.CounterChange
+import xyz.thomasmohr.onfire.inflate
 
-class CounterAdapter(private val context: Context) : RecyclerView.Adapter<CounterViewHolder>() {
+class CounterAdapter : RecyclerView.Adapter<CounterViewHolder>() {
 
     private var counters: List<Counter> = emptyList()
 
@@ -42,7 +43,7 @@ class CounterAdapter(private val context: Context) : RecyclerView.Adapter<Counte
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ) = CounterViewHolder(context, parent)
+    ) = CounterViewHolder(parent.inflate(R.layout.counter))
 
     override fun onBindViewHolder(
         holder: CounterViewHolder,

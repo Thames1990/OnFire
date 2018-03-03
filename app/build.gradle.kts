@@ -3,6 +3,8 @@ import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.kotlin
 import org.gradle.kotlin.dsl.setValue
 
+apply { from("experimentalExtensions.gradle") }
+
 plugins {
     id("com.android.application")
     id("com.gladed.androidgitversion")

@@ -1,47 +1,43 @@
 package xyz.thomasmohr.onfire.ui
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import xyz.thomasmohr.onfire.R
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.counter.*
 import xyz.thomasmohr.onfire.data.Counter
 import xyz.thomasmohr.onfire.data.CounterChange
-import xyz.thomasmohr.onfire.util.bindView
 
-class CounterViewHolder(context: Context, parent: ViewGroup) : RecyclerView.ViewHolder(
-    LayoutInflater.from(context).inflate(R.layout.counter, parent, false)
-) {
+class CounterViewHolder(
+    override val containerView: View?
+) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     companion object {
         private val DUMMY_COUNTER = Counter(-1)
     }
 
-    private val count: TextView by bindView(R.id.count)
-    private val counterName: EditText by bindView(R.id.counter_name)
-    private val minusButton: Button by bindView(R.id.minus_button)
-    private val plusButton: Button by bindView(R.id.plus_button)
-
     private var counter: Counter = DUMMY_COUNTER
 
-    private lateinit var listener: Listener
+    fun bind(counter: Counter, listener: Listener) {
+        if (this.counter == counter) return
+        this.counter = counter
 
-    init {
-        plusButton.setOnClickListener {
+        if (counter_name.text.toString() != counter.name) {
+            counter_name.setText(counter.name)
+        }
+        count.text = counter.count.toString()
+
+        plus_button.setOnClickListener {
             listener.onCounterChange(CounterChange.Count(counterId = counter.id, difference = 1))
         }
 
-        minusButton.setOnClickListener {
+        minus_button.setOnClickListener {
             listener.onCounterChange(CounterChange.Count(counterId = counter.id, difference = -1))
         }
 
-        with(counterName) {
+        with(counter_name) {
             setOnEditorActionListener { v, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     // If you try to clear focus immediately it doesn't work
@@ -71,20 +67,8 @@ class CounterViewHolder(context: Context, parent: ViewGroup) : RecyclerView.View
         }
     }
 
-    fun bind(counter: Counter, listener: Listener) {
-        if (this.counter == counter) return
-
-        this.listener = listener
-        this.counter = counter
-
-        if (counterName.text.toString() != counter.name) {
-            counterName.setText(counter.name)
-        }
-        count.text = counter.count.toString()
-    }
-
     fun detach() {
-        if (counterName.hasFocus()) counterName.clearFocus()
+        if (counter_name.hasFocus()) counter_name.clearFocus()
     }
 
     interface Listener {
