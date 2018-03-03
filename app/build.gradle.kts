@@ -7,6 +7,7 @@ plugins {
     id("com.android.application")
     id("com.gladed.androidgitversion")
     kotlin("android")
+    kotlin("android.extensions")
     kotlin("kapt")
 }
 
@@ -18,11 +19,11 @@ android {
         applicationId = Config.Android.applicationId
         minSdkVersion(Config.Android.minSdkVersion)
         targetSdkVersion(Config.Android.targetSdkVersion)
-
-        androidGitVersion.prefix = "v"
         versionCode = androidGitVersion.code()
         versionName = androidGitVersion.name()
 
+        androidExtensions.isExperimental = true
+        androidGitVersion.prefix = "v"
         vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"

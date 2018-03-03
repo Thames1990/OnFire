@@ -2,7 +2,6 @@ package xyz.thomasmohr.onfire.ui
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
@@ -10,25 +9,20 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.support.v7.widget.helper.ItemTouchHelper.*
-import android.view.View
 import com.jakewharton.rxbinding2.view.clicks
 import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.architecture.ext.viewModel
 import xyz.thomasmohr.onfire.R
 import xyz.thomasmohr.onfire.data.Counter
 import xyz.thomasmohr.onfire.data.CounterChange
-import xyz.thomasmohr.onfire.util.bindView
 import xyz.thomasmohr.onfire.util.plus
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
-
-    private val coordinatorLayout: CoordinatorLayout by bindView(R.id.coordinator_layout)
-    private val createButton: View by bindView(R.id.create_button)
-    private val recyclerView: RecyclerView by bindView(R.id.recycler_view)
 
     private val changeRequestRelay = PublishRelay.create<CounterChange>()
     private val counterAdapter = CounterAdapter(this)
@@ -42,18 +36,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        with(recyclerView) {
+        with(recycler_view) {
             layoutManager = linearLayoutManager
             adapter = counterAdapter
             itemAnimator = DefaultItemAnimator().apply { supportsChangeAnimations = false }
-        }
 
-        val callback: ItemTouchHelper.Callback = DragManageAdapter(
-            dragDirs = UP or DOWN,
-            swipeDirs = LEFT or RIGHT
-        )
-        val helper = ItemTouchHelper(callback)
-        helper.attachToRecyclerView(recyclerView)
+            val callback: ItemTouchHelper.Callback = DragManageAdapter(
+                dragDirs = UP or DOWN,
+                swipeDirs = LEFT or RIGHT
+            )
+            val itemTouchHelper = ItemTouchHelper(callback)
+            itemTouchHelper.attachToRecyclerView(this)
+        }
 
         // Always guarantee at least one counter, so the app doesn't open blank on a fresh run
         if (savedInstanceState == null) {
@@ -71,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             .observeOn(Schedulers.io())
             .subscribe(::onCounterChangeRequested)
 
-        startDisposables += createButton.clicks()
+        startDisposables += create_button.clicks()
             .map { CounterChange.Create() }
             .subscribe(changeRequestRelay)
         startDisposables += counterAdapter.changes().subscribe(changeRequestRelay)
@@ -102,7 +96,7 @@ class MainActivity : AppCompatActivity() {
             .map { counterAdapter.getPosition(it) }
             .filter { it != -1 }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { linearLayoutManager.smoothScrollToPosition(recyclerView, null, it) }
+            .subscribe { linearLayoutManager.smoothScrollToPosition(recycler_view, null, it) }
     }
 
     override fun onStop() {
@@ -147,7 +141,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     Snackbar
-                        .make(coordinatorLayout, text, Snackbar.LENGTH_LONG)
+                        .make(coordinator_layout, text, Snackbar.LENGTH_LONG)
                         .setAction(R.string.snackbar_undo, {
                             changeRequestRelay.accept(CounterChange.UndoDelete(counter))
                         })
