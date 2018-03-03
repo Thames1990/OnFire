@@ -19,7 +19,6 @@ import org.koin.android.architecture.ext.viewModel
 import xyz.thomasmohr.onfire.R
 import xyz.thomasmohr.onfire.data.Counter
 import xyz.thomasmohr.onfire.data.CounterChange
-import xyz.thomasmohr.onfire.plus
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
@@ -60,43 +59,44 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        // Ensure all database changes happen off the main thread
-        startDisposables += changeRequestRelay
-            .observeOn(Schedulers.io())
-            .subscribe(::onCounterChangeRequested)
-
-        startDisposables += create_button.clicks()
-            .map { CounterChange.Create() }
-            .subscribe(changeRequestRelay)
-        startDisposables += counterAdapter.changes().subscribe(changeRequestRelay)
-        startDisposables += counterAdapter.bind(viewModel.counters())
-
-        // Detect when new items are added so we can scroll to them
-        // This is admittedly a bit of a hack
-        data class ItemIdChanges(val itemIds: Set<Long>, val addedItemIds: Set<Long>)
-        startDisposables += viewModel.counters()
-            .map { counters -> counters.map { it.id }.toSet() }
-            .distinctUntilChanged()
-            .scan(ItemIdChanges(
-                itemIds = emptySet(),
-                addedItemIds = emptySet()
-            ), { (itemIds), newItemIds ->
-                // Skip the initial add; we only care about *new* items
-                if (itemIds.isEmpty()) {
-                    ItemIdChanges(newItemIds, emptySet())
-                } else {
-                    val addedItemIds = newItemIds.toMutableSet()
-                    addedItemIds.removeAll(itemIds)
-                    ItemIdChanges(newItemIds, addedItemIds)
-                }
-            })
-            .filter { (_, addedItemIds) -> addedItemIds.isNotEmpty() }
-            .map { (_, addedItemIds) -> addedItemIds.first() }
-            .delay(100, TimeUnit.MILLISECONDS) // Give the adapter time to settle
-            .map { counterAdapter.getPosition(it) }
-            .filter { it != -1 }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { linearLayoutManager.smoothScrollToPosition(recycler_view, null, it) }
+        with(startDisposables) {
+            // Ensure all database changes happen off the main thread
+            add(changeRequestRelay.observeOn(Schedulers.io()).subscribe(::onCounterChangeRequested))
+            add(create_button.clicks().map { CounterChange.Create() }.subscribe(changeRequestRelay))
+            add(counterAdapter.changes().subscribe(changeRequestRelay))
+            // Detect when new items are added so we can scroll to them
+            // This is admittedly a bit of a hack
+            data class ItemIdChanges(val itemIds: Set<Long>, val addedItemIds: Set<Long>)
+            add(counterAdapter.bind(viewModel.counters()))
+            add(viewModel.counters()
+                .map { counters -> counters.map { it.id }.toSet() }
+                .distinctUntilChanged()
+                .scan(ItemIdChanges(
+                    itemIds = emptySet(),
+                    addedItemIds = emptySet()
+                ), { (itemIds), newItemIds ->
+                    // Skip the initial add; we only care about *new* items
+                    if (itemIds.isEmpty()) ItemIdChanges(newItemIds, emptySet())
+                    else {
+                        val addedItemIds = newItemIds.toMutableSet()
+                        addedItemIds.removeAll(itemIds)
+                        ItemIdChanges(newItemIds, addedItemIds)
+                    }
+                })
+                .filter { (_, addedItemIds) -> addedItemIds.isNotEmpty() }
+                .map { (_, addedItemIds) -> addedItemIds.first() }
+                .delay(100, TimeUnit.MILLISECONDS) // Give the adapter time to settle
+                .map { counterAdapter.getPosition(it) }
+                .filter { it != -1 }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    linearLayoutManager.smoothScrollToPosition(
+                        recycler_view,
+                        null,
+                        it
+                    )
+                })
+        }
     }
 
     override fun onStop() {
@@ -112,11 +112,10 @@ class MainActivity : AppCompatActivity() {
 
                 val counter: Counter? = viewModel.counter(change.counterId)
                 if (counter != null) {
-                    val count: Long = counter.count
-                    val soundName = "russ_bray_$count"
+                    val soundName = "russ_bray_${counter.count}"
                     val soundId = resources.getIdentifier(soundName, "raw", packageName)
 
-                    if (soundId == 0) return
+                    if (soundId == 0) return // Sound file is not available
                     val sound = resources.openRawResourceFd(soundId)
 
                     with(mediaPlayer) {
@@ -125,6 +124,7 @@ class MainActivity : AppCompatActivity() {
                         prepare()
                         start()
                     }
+
                     sound.close()
                 }
             }
