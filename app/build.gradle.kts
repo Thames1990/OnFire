@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation(Libs.kau)
     implementation(Libs.kotlin_std)
     // Support Library
     implementation(Libs.SupportLibrary.appcompat)
