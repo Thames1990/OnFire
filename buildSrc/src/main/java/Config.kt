@@ -4,7 +4,7 @@ private const val kotlinVersion = "1.2.30"
 
 object Android {
     const val buildToolsVersion = "27.0.3"
-    const val minSdkVersion = 19
+    const val minSdkVersion = 15
     const val targetSdkVersion = 27
     const val compileSdkVersion = 27
     const val applicationId = "xyz.thomasmohr.onfire"
