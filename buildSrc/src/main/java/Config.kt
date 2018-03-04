@@ -26,8 +26,6 @@ object BuildPlugins {
 }
 
 object Libs {
-    const val kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
-
     object SupportLibrary {
         const val appcompat = "com.android.support:appcompat-v7:${Versions.supportLibrary}"
         const val cardview = "com.android.support:cardview-v7:${Versions.supportLibrary}"

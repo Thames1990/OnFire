@@ -40,7 +40,7 @@ android {
 }
 
 dependencies {
-    implementation(Libs.kotlin_std)
+    implementation(kotlin(module = "stdlib", version = Versions.kotlin))
     // Support Library
     implementation(Libs.SupportLibrary.appcompat)
     implementation(Libs.SupportLibrary.cardview)
