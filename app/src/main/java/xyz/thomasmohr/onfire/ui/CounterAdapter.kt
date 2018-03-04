@@ -29,13 +29,13 @@ class CounterAdapter : RecyclerView.Adapter<CounterViewHolder>() {
 
     fun changes(): Observable<CounterChange> = changes.hide()
 
-    fun bind(source: Flowable<List<Counter>>): Disposable = source
+    fun bind(counters: Flowable<List<Counter>>): Disposable = counters
         .scan(CountersWithDiff(counters = emptyList(), diff = null)) { (old), new ->
             CountersWithDiff(counters = new, diff = DiffUtil.calculateDiff(DiffCallback(old, new)))
         }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe { countersWithDiff ->
-            counters = countersWithDiff.counters
+            this.counters = countersWithDiff.counters
             // Dispatch update events if available; otherwise notify that all counters changed
             countersWithDiff.diff?.dispatchUpdatesTo(this) ?: notifyDataSetChanged()
         }
