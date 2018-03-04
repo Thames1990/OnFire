@@ -40,10 +40,7 @@ class MainActivity : AppCompatActivity() {
             adapter = counterAdapter
             itemAnimator = DefaultItemAnimator().apply { supportsChangeAnimations = false }
 
-            val callback: ItemTouchHelper.Callback = DragManageAdapter(
-                dragDirs = UP or DOWN,
-                swipeDirs = LEFT or RIGHT
-            )
+            val callback: ItemTouchHelper.Callback = DragManageCallback()
             val itemTouchHelper = ItemTouchHelper(callback)
             itemTouchHelper.attachToRecyclerView(this)
         }
@@ -152,9 +149,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private inner class DragManageAdapter(
-        dragDirs: Int,
-        swipeDirs: Int
+    private inner class DragManageCallback(
+        dragDirs: Int = UP or DOWN,
+        swipeDirs: Int = LEFT or RIGHT
     ) : SimpleCallback(dragDirs, swipeDirs) {
 
         private var lastFrom: Int = -1
