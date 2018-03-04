@@ -20,7 +20,6 @@ object BuildPlugins {
 }
 
 object Libs {
-    const val kau = "ca.allanwang.kau:core:3.7.0"
     const val kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
     object SupportLibrary {
