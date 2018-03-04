@@ -1,6 +1,14 @@
 @file:Suppress("unused")
 
-private const val kotlinVersion = "1.2.30"
+object Versions {
+    const val androidGitVersion = "0.4.3"
+    const val koin = "0.8.2"
+    const val kotlin = "1.2.30"
+    const val lifecycle = "1.1.0"
+    const val room = "1.0.0"
+    const val rxBinding = "2.1.1"
+    const val supportLibrary = "27.1.0"
+}
 
 object Android {
     const val buildToolsVersion = "27.0.3"
@@ -13,36 +21,31 @@ object Android {
 }
 
 object BuildPlugins {
-    const val androidGitVersion =
-        "gradle.plugin.com.gladed.gradle.androidgitversion:gradle-android-git-version:0.4.3"
     const val androidGradle = "com.android.tools.build:gradle:3.0.1"
-    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
 }
 
 object Libs {
-    const val kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    const val kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
 
     object SupportLibrary {
-        private const val version = "27.1.0"
-        const val appcompat = "com.android.support:appcompat-v7:$version"
-        const val cardview = "com.android.support:cardview-v7:$version"
+        const val appcompat = "com.android.support:appcompat-v7:${Versions.supportLibrary}"
+        const val cardview = "com.android.support:cardview-v7:${Versions.supportLibrary}"
         const val constraintLayout = "com.android.support.constraint:constraint-layout:1.0.2"
-        const val design = "com.android.support:design:$version"
-        const val recyclerview = "com.android.support:recyclerview-v7:$version"
+        const val design = "com.android.support:design:${Versions.supportLibrary}"
+        const val recyclerview = "com.android.support:recyclerview-v7:${Versions.supportLibrary}"
     }
 
     object ArchitectureComponents {
         object Lifecycle {
-            private const val version = "1.1.0"
-            const val extensions = "android.arch.lifecycle:extensions:$version"
-            const val compiler = "android.arch.lifecycle:compiler:$version"
+            const val extensions = "android.arch.lifecycle:extensions:${Versions.lifecycle}"
+            const val compiler = "android.arch.lifecycle:compiler:${Versions.lifecycle}"
         }
 
         object Room {
-            private const val version = "1.0.0"
-            const val compiler = "android.arch.persistence.room:compiler:$version"
-            const val runtime = "android.arch.persistence.room:runtime:$version"
-            const val rxJava = "android.arch.persistence.room:rxjava2:$version"
+            const val compiler = "android.arch.persistence.room:compiler:${Versions.room}"
+            const val runtime = "android.arch.persistence.room:runtime:${Versions.room}"
+            const val rxJava = "android.arch.persistence.room:rxjava2:${Versions.room}"
         }
     }
 
@@ -51,16 +54,14 @@ object Libs {
         const val relay = "com.jakewharton.rxrelay2:rxrelay:2.0.0"
 
         object Binding {
-            private const val version = "2.1.1"
-            const val core = "com.jakewharton.rxbinding2:rxbinding:$version"
-            const val kotlin = "com.jakewharton.rxbinding2:rxbinding-kotlin:$version"
+            const val core = "com.jakewharton.rxbinding2:rxbinding:${Versions.rxBinding}"
+            const val kotlin = "com.jakewharton.rxbinding2:rxbinding-kotlin:${Versions.rxBinding}"
         }
     }
 
     object Koin {
-        private const val version = "0.8.2"
-        const val android = "org.koin:koin-android:$version"
-        const val androidArchitecture = "org.koin:koin-android-architecture:$version"
+        const val android = "org.koin:koin-android:${Versions.koin}"
+        const val androidArchitecture = "org.koin:koin-android-architecture:${Versions.koin}"
     }
 }
 

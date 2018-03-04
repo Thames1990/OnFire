@@ -7,7 +7,7 @@ apply { from("experimentalExtensions.gradle") }
 
 plugins {
     id("com.android.application")
-    id("com.gladed.androidgitversion")
+    id("com.gladed.androidgitversion") version Versions.androidGitVersion
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
