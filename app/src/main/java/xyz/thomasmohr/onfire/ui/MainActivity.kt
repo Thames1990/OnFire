@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
 
                 val counter: Counter? = viewModel.counter(change.counterId)
                 if (counter != null) {
-                    val soundName = "russ_bray_${counter.count}"
+                    val soundName = "throw_${counter.count}"
                     val soundId = resources.getIdentifier(soundName, "raw", packageName)
 
                     if (soundId == 0) return // Sound file is not available
