@@ -17,6 +17,6 @@ class OnFire : Application() {
 }
 
 private val appModule = applicationContext {
-    provide { CounterDatabase.createPersistentDatabase(get()) }
+    bean { CounterDatabase.createPersistentDatabase(get()) }
     viewModel { CounterViewModel(get()) }
 }
