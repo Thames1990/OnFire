@@ -7,7 +7,7 @@ import org.koin.dsl.module.applicationContext
 import xyz.thomasmohr.onfire.data.CounterDatabase
 import xyz.thomasmohr.onfire.ui.CounterViewModel
 
-class CounterApplication : Application() {
+class OnFire : Application() {
 
     override fun onCreate() {
         super.onCreate()
