@@ -2,7 +2,7 @@
 
 object Versions {
     const val androidGitVersion = "0.4.3"
-    const val koin = "0.9.0"
+    const val koin = "0.9.1"
     const val kotlin = "1.2.30"
     const val lifecycle = "1.1.0"
     const val room = "1.0.0"
