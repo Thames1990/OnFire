@@ -29,7 +29,7 @@ object Libs {
     object SupportLibrary {
         const val appcompat = "com.android.support:appcompat-v7:${Versions.supportLibrary}"
         const val cardview = "com.android.support:cardview-v7:${Versions.supportLibrary}"
-        const val constraintLayout = "com.android.support.constraint:constraint-layout:1.0.2"
+        const val constraintLayout = "com.android.support.constraint:constraint-layout:1.1.0"
         const val design = "com.android.support:design:${Versions.supportLibrary}"
         const val recyclerview = "com.android.support:recyclerview-v7:${Versions.supportLibrary}"
     }
