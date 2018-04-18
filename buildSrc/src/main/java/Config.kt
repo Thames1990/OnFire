@@ -2,7 +2,7 @@
 
 object Versions {
     const val androidGitVersion = "0.4.3"
-    const val koin = "0.9.1"
+    const val koin = "0.9.2"
     const val kotlin = "1.2.31"
     const val lifecycle = "1.1.1"
     const val room = "1.0.0"
@@ -21,7 +21,7 @@ object Android {
 }
 
 object BuildPlugins {
-    const val androidGradle = "com.android.tools.build:gradle:3.0.1"
+    const val androidGradle = "com.android.tools.build:gradle:3.1.1"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
 }
 
