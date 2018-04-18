@@ -7,7 +7,7 @@ object Versions {
     const val lifecycle = "1.1.0"
     const val room = "1.0.0"
     const val rxBinding = "2.1.1"
-    const val supportLibrary = "27.1.0"
+    const val supportLibrary = "27.1.1"
 }
 
 object Android {
