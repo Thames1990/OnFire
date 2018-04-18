@@ -48,7 +48,7 @@ object Libs {
     }
 
     object RxJava {
-        const val core = "io.reactivex.rxjava2:rxjava:2.1.10"
+        const val core = "io.reactivex.rxjava2:rxjava:2.1.12"
         const val relay = "com.jakewharton.rxrelay2:rxrelay:2.0.0"
 
         object Binding {
