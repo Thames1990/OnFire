@@ -23,12 +23,16 @@ class CounterViewHolder(
     private lateinit var listener: Listener
 
     init {
-        plus_button.setOnClickListener {
+        one_button.setOnClickListener {
             listener.onCounterChange(CounterChange.Count(counterId = counter.id, difference = 1))
         }
 
-        minus_button.setOnClickListener {
-            listener.onCounterChange(CounterChange.Count(counterId = counter.id, difference = -1))
+        two_button.setOnClickListener {
+            listener.onCounterChange(CounterChange.Count(counterId = counter.id, difference = 2))
+        }
+
+        three_button.setOnClickListener {
+            listener.onCounterChange(CounterChange.Count(counterId = counter.id, difference = 3))
         }
 
         with(counter_name) {
