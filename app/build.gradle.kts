@@ -66,5 +66,6 @@ dependencies {
     testImplementation(TestLibs.jUnit)
     // Instrumentation test
     androidTestImplementation(TestLibs.espresso)
+    androidTestImplementation(TestLibs.testRunner)
     androidTestImplementation(TestLibs.jUnit)
 }

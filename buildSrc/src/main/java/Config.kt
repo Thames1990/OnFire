@@ -65,5 +65,6 @@ object Libs {
 
 object TestLibs {
     const val espresso = "com.android.support.test.espresso:espresso-core:3.0.1"
+    const val testRunner = "com.android.support.test:runner:1.0.2"
     const val jUnit = "junit:junit:4.12"
 }
