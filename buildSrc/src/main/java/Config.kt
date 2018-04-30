@@ -21,7 +21,7 @@ object Android {
 }
 
 object BuildPlugins {
-    const val androidGradle = "com.android.tools.build:gradle:3.1.1"
+    const val androidGradle = "com.android.tools.build:gradle:3.1.2"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
 }
 
